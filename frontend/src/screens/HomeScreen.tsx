@@ -47,6 +47,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         getEmergencyContacts(),
       ]);
       setInfo(patientInfo);
+      setText(patientInfo.issueSummarization);
       setEmergencyNums(contacts.emergencyContactNums);
     } catch (error) {
       console.error('Failed to load data:', error);
