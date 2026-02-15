@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,8 +10,12 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  NativeModules,
+  PermissionsAndroid,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { RunAnywhere } from '@runanywhere/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useFocusEffect } from '@react-navigation/native';
 import { AppColors } from '../theme';
@@ -22,6 +26,10 @@ import {
   getEmergencyContacts,
   updateEmergencyContacts,
 } from '../services/api';
+import { useModelService } from '../services/ModelService';
+import { ModelLoaderWidget, AudioVisualizer } from '../components';
+
+const { NativeAudioModule } = NativeModules;
 
 type ProfileScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Profile'>;
@@ -35,6 +43,27 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [doctorApproved, setDoctorApproved] = useState(false);
+  const modelService = useModelService();
+  const [isRecording, setIsRecording] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [transcription, setTranscription] = useState('');
+  const [transcriptionHistory, setTranscriptionHistory] = useState<string[]>([]);
+  const [audioLevel, setAudioLevel] = useState(0);
+  const [recordingDuration, setRecordingDuration] = useState(0);
+  const recordingPathRef = useRef<string | null>(null);
+  const audioLevelIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const recordingStartRef = useRef<number>(0);
+
+  useEffect(() => {
+    return () => {
+      if (audioLevelIntervalRef.current) {
+        clearInterval(audioLevelIntervalRef.current);
+      }
+      if (isRecording && NativeAudioModule) {
+        NativeAudioModule.cancelRecording().catch(() => { });
+      }
+    };
+  }, [isRecording]);
 
   useFocusEffect(
     useCallback(() => {
@@ -104,6 +133,140 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
       </View>
     );
   }
+
+  const startRecording = async () => {
+    try {
+      // Check if native module is available
+      if (!NativeAudioModule) {
+        console.error('[STT] NativeAudioModule not available');
+        Alert.alert('Error', 'Native audio module not available. Please rebuild the app.');
+        return;
+      }
+
+      // Request microphone permission on Android
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+          {
+            title: 'Microphone Permission',
+            message: 'This app needs access to your microphone for speech recognition.',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          }
+        );
+        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+          Alert.alert('Permission Denied', 'Microphone permission is required for speech recognition.');
+          return;
+        }
+      }
+
+      console.warn('[STT] Starting native recording...');
+      const result = await NativeAudioModule.startRecording();
+
+      recordingPathRef.current = result.path;
+      recordingStartRef.current = Date.now();
+      setIsRecording(true);
+      setTranscription('');
+      setRecordingDuration(0);
+
+      // Poll for audio levels
+      audioLevelIntervalRef.current = setInterval(async () => {
+        try {
+          const levelResult = await NativeAudioModule.getAudioLevel();
+          setAudioLevel(levelResult.level || 0);
+          setRecordingDuration(Date.now() - recordingStartRef.current);
+        } catch (e) {
+          // Ignore errors during polling
+        }
+      }, 100);
+
+      console.warn('[STT] Recording started at:', result.path);
+    } catch (error) {
+      console.error('[STT] Recording error:', error);
+      Alert.alert('Recording Error', `Failed to start recording: ${error}`);
+    }
+  };
+
+  const stopRecordingAndTranscribe = async () => {
+    try {
+      // Clear audio level polling
+      if (audioLevelIntervalRef.current) {
+        clearInterval(audioLevelIntervalRef.current);
+        audioLevelIntervalRef.current = null;
+      }
+
+      if (!NativeAudioModule) {
+        throw new Error('NativeAudioModule not available');
+      }
+
+      console.warn('[STT] Stopping recording...');
+      const result = await NativeAudioModule.stopRecording();
+      setIsRecording(false);
+      setAudioLevel(0);
+      setIsTranscribing(true);
+
+      // Get the base64 audio data directly from native module (bypasses RNFS sandbox issues)
+      const audioBase64 = result.audioBase64;
+      if (!audioBase64) {
+        throw new Error('No audio data received from recording');
+      }
+
+      console.warn('[STT] Recording stopped, audio base64 length:', audioBase64.length, 'file size:', result.fileSize);
+
+      if (result.fileSize < 1000) {
+        throw new Error('Recording too short - please speak longer');
+      }
+
+      // Check if STT model is loaded
+      const isModelLoaded = await RunAnywhere.isSTTModelLoaded();
+      if (!isModelLoaded) {
+        throw new Error('STT model not loaded. Please download and load the model first.');
+      }
+
+      // Transcribe using base64 audio data directly from native module
+      console.warn('[STT] Starting transcription...');
+      const transcribeResult = await RunAnywhere.transcribe(audioBase64, {
+        sampleRate: 16000,
+        language: 'en',
+      });
+
+      console.warn('[STT] Transcription result:', transcribeResult);
+
+      if (transcribeResult.text) {
+        setTranscription(transcribeResult.text);
+        setTranscriptionHistory(prev => [transcribeResult.text, ...prev]);
+        setFullInfo(transcribeResult.text)
+      } else {
+        setTranscription('(No speech detected)');
+      }
+
+      recordingPathRef.current = null;
+      setIsTranscribing(false);
+    } catch (error) {
+      console.error('[STT] Transcription error:', error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      setTranscription(`Error: ${errorMessage}`);
+      Alert.alert('Transcription Error', errorMessage);
+      setIsTranscribing(false);
+    }
+  };
+
+  if (!modelService.isSTTLoaded) {
+    return (
+      <ModelLoaderWidget
+        title="STT Model Required"
+        subtitle="Download and load the speech recognition model"
+        icon="mic"
+        accentColor={AppColors.accentViolet}
+        isDownloading={modelService.isSTTDownloading}
+        isLoading={modelService.isSTTLoading}
+        progress={modelService.sttDownloadProgress}
+        onLoad={modelService.downloadAndLoadSTT}
+      />
+    );
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -160,12 +323,13 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                     treatment plans, etc.
                   </Text>
                 </View>
-                <TouchableOpacity
-                  style={styles.voiceButton}
-                  onPress={() => {/* rohanldinio will take care */}}
-                >
-                  <Text style={styles.voiceButtonIcon}>🎙</Text>
-                </TouchableOpacity>
+                <Text style={styles.voiceButtonIcon}
+                  onPress={isRecording ? stopRecordingAndTranscribe : startRecording}
+                  disabled={isTranscribing}>
+                  <Text>
+                    {isRecording ? '⏹' : '🎤'}
+                  </Text>
+                </Text>
               </View>
               <TextInput
                 style={[styles.input, styles.textArea]}
