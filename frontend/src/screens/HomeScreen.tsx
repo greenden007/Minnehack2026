@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { AppColors } from '../theme';
 import { RootStackParamList } from '../navigation/types';
 import { getPatientInfo, getEmergencyContacts, PatientInfo, logout } from '../services/api';
+import { liveActivityService } from '../services/LiveActivityService';
 
 type HomeScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -34,6 +35,19 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       ]);
       setInfo(patientInfo);
       setEmergencyNums(contacts.emergencyContactNums);
+
+      // Start/Update Live Activity with dynamic data
+      if (patientInfo) {
+        const patientName = `${patientInfo.firstName} ${patientInfo.lastName}`;
+        const issue = patientInfo.issueSummarization || "No condition summary available";
+        const status = patientInfo.doctorApproved ? "Doctor Verified" : "Pending Verification";
+
+        try {
+          await liveActivityService.startActivity(patientName, status, issue);
+        } catch (err) {
+          console.error('Failed to start Live Activity:', err);
+        }
+      }
     } catch (error) {
       console.error('Failed to load data:', error);
     } finally {
@@ -56,6 +70,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   const handleLogout = async () => {
     try {
+      await liveActivityService.endActivity();
       await logout();
     } catch (error) {
       console.error('Logout failed:', error);
@@ -114,7 +129,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                         <Text style={styles.summaryLabel}>CONDITION SUMMARY</Text>
                         <TouchableOpacity
                           style={styles.ttsButton}
-                          onPress={() => {/* rohanldinio will take care */}}
+                          onPress={() => {/* rohanldinio will take care */ }}
                         >
                           <Text style={styles.ttsButtonIcon}>🔊</Text>
                         </TouchableOpacity>
