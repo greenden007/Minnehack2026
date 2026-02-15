@@ -102,6 +102,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact/React-cxxreact_privacy.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/boost/boost_privacy.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/glog/glog_privacy.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/RNCAsyncStorage/RNCAsyncStorage_resources.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/SSZipArchive/SSZipArchive.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/RCT-Folly/RCT-Folly_privacy.bundle"
@@ -109,6 +111,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact/React-cxxreact_privacy.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/boost/boost_privacy.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/glog/glog_privacy.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/RNCAsyncStorage/RNCAsyncStorage_resources.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/SSZipArchive/SSZipArchive.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

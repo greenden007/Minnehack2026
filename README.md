@@ -33,6 +33,8 @@ and display the user's medical information to assist first responders in
 providing appropriate care.
 
 - User-Friendly Interface: The app is designed to be easy to use for both users 
-and first responders, so  it 
-
+and first responders, so it will utilize RunAnywhere's SDK to create a text to 
+speech interface that reads out loud the patient's medical information for the 
+first responders, and an LLM that summerizes the user's medical information to a
+few sentneces which is what will be read out loud.
 

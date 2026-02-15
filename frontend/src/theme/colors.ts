@@ -1,20 +1,21 @@
-/**
- * App color palette - Inspired by modern AI/tech aesthetics
- * Matching the Flutter app's beautiful theme
- */
 export const AppColors = {
-  // Primary gradient colors - Deep space with electric accents
+  // Primary background colors
   primaryDark: '#0A0E1A',
   primaryMid: '#141B2D',
   surfaceCard: '#1C2438',
   surfaceElevated: '#242F4A',
 
-  // Accent colors - Electric cyan, violet, and more
+  // Accent colors
   accentCyan: '#00D9FF',
   accentViolet: '#8B5CF6',
   accentPink: '#EC4899',
   accentGreen: '#10B981',
   accentOrange: '#F59E0B',
+
+  // Emergency colors
+  emergency: '#DC2626',
+  emergencyDark: '#991B1B',
+  safe: '#16A34A',
 
   // Text colors
   textPrimary: '#F1F5F9',
