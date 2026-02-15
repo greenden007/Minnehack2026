@@ -10,11 +10,8 @@ import { ModelServiceProvider, registerDefaultModels } from './services/ModelSer
 import { AppColors } from './theme';
 import {
   HomeScreen,
-  ChatScreen,
-  ToolCallingScreen,
-  SpeechToTextScreen,
-  TextToSpeechScreen,
-  VoicePipelineScreen,
+  LoginScreen,
+  ProfileScreen
 } from './screens';
 import { RootStackParamList } from './navigation/types';
 
