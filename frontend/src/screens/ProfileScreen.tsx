@@ -139,12 +139,12 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Condition Summary</Text>
               <Text style={styles.sectionHint}>
-                Brief description for first responders (e.g. "Severe peanut
+                Brief description for first responders (example "Severe peanut
                 allergy, carries EpiPen")
               </Text>
               <TextInput
                 style={styles.input}
-                placeholder="e.g. Severe peanut allergy, Type 1 Diabetes..."
+                placeholder="example Severe peanut allergy, Type 1 Diabetes..."
                 placeholderTextColor={AppColors.textMuted}
                 value={issueSummarization}
                 onChangeText={setIssueSummarization}
@@ -169,7 +169,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
               </View>
               <TextInput
                 style={[styles.input, styles.textArea]}
-                placeholder="Include all relevant medical information: conditions, medications with dosages, allergies, blood type, treatment instructions..."
+                placeholder="Include all relevant medical information: conditions, medications with dosages, allergies, blood type, treatment instructions etc..."
                 placeholderTextColor={AppColors.textMuted}
                 value={fullInfo}
                 onChangeText={setFullInfo}
