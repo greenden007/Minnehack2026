@@ -34,7 +34,7 @@ export async function clearToken(): Promise<void> {
 async function authHeaders(): Promise<Record<string, string>> {
   const token = await getToken();
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-  if (token) {
+  if (token != null) {
     headers['Authorization'] = token;
   }
   return headers;

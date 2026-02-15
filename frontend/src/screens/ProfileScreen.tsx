@@ -7,7 +7,6 @@ import {
   StyleSheet,
   StatusBar,
   ScrollView,
-  Alert,
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
@@ -70,10 +69,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         }),
         updateEmergencyContacts(emergencyNums),
       ]);
-      Alert.alert('Saved', 'Your medical profile has been updated.');
       navigation.goBack();
     } catch (error: any) {
-      Alert.alert('Error', error.message || 'Failed to save.');
     } finally {
       setSaving(false);
     }
@@ -82,6 +79,9 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const addContact = () => {
     const trimmed = newContact.trim();
     if (!trimmed) return;
+    if (emergencyNums.length >= 3) {
+      return;
+    }
     setEmergencyNums((prev) => [...prev, trimmed]);
     setNewContact('');
   };
@@ -184,19 +184,21 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                 </View>
               ))}
 
-              <View style={styles.addContactRow}>
-                <TextInput
-                  style={[styles.input, styles.contactInput]}
-                  placeholder="Phone number"
-                  placeholderTextColor={AppColors.textMuted}
-                  value={newContact}
-                  onChangeText={setNewContact}
-                  keyboardType="phone-pad"
-                />
-                <TouchableOpacity style={styles.addButton} onPress={addContact}>
-                  <Text style={styles.addButtonText}>Add</Text>
-                </TouchableOpacity>
-              </View>
+              {emergencyNums.length < 3 && (
+                <View style={styles.addContactRow}>
+                  <TextInput
+                    style={[styles.input, styles.contactInput]}
+                    placeholder="Phone number"
+                    placeholderTextColor={AppColors.textMuted}
+                    value={newContact}
+                    onChangeText={setNewContact}
+                    keyboardType="phone-pad"
+                  />
+                  <TouchableOpacity style={styles.addButton} onPress={addContact}>
+                    <Text style={styles.addButtonText}>Add</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
             <TouchableOpacity
               onPress={handleSave}
@@ -323,7 +325,10 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.accentCyan,
     borderRadius: 10,
     paddingHorizontal: 18,
+    paddingVertical: 12,
+    minHeight: 48,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   addButtonText: {
     color: '#fff',
@@ -333,8 +338,10 @@ const styles = StyleSheet.create({
   saveButton: {
     borderRadius: 12,
     overflow: 'hidden',
+    width: '100%',
     minHeight: 48,
-    marginTop: 4,
+    marginTop: 8,
+    justifyContent: 'center',
   },
   saveGradient: {
     paddingVertical: 16,

@@ -348,6 +348,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
     minHeight: 48,
+    width: '100%',
   },
   editGradient: {
     paddingVertical: 16,

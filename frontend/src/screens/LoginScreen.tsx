@@ -34,17 +34,14 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
   const handleSubmit = async () => {
     if (!email.trim() || !password.trim()) {
-      Alert.alert('Error', 'Please fill in all required fields.');
       return;
     }
 
     if (isSignUp) {
       if (!username.trim() || !firstName.trim()) {
-        Alert.alert('Error', 'Please fill in all required fields.');
         return;
       }
       if (password !== confirmPassword) {
-        Alert.alert('Error', 'Passwords do not match.');
         return;
       }
     }
@@ -278,7 +275,6 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 6,
     borderRadius: 10,
-    overflow: 'hidden',
     minHeight: 48,
   },
   submitGradient: {
