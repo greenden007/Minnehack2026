@@ -12,11 +12,11 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { AppColors } from "../theme";
 import { RootStackParamList } from "../navigation/types";
 
-type LoginScreenProps = {
+type ProfileScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, "Profile">;
 };
 
-export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
+export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -35,7 +35,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         style={styles.gradient}
       >
         <View style={styles.content}>
-          <Text style={styles.title}>Welcome Back</Text>
+          <Text style={styles.title}>Profile</Text>
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -51,8 +51,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             value={password}
             onChangeText={setPassword}
           />
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Log In</Text>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.buttonText}>Log Out</Text>
           </TouchableOpacity>
         </View>
       </LinearGradient>

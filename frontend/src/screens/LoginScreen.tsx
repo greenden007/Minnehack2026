@@ -49,17 +49,17 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             secureTextEntry
             value={password}
             onChangeText={setPassword}
-            />
-            <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
-                <LinearGradient
-                    colors={[AppColors.accentCyan, AppColors.accentViolet]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    style={styles.loginGradient}
-                >
-                    <Text style={styles.loginText}>Log In</Text>
-                </LinearGradient>
-            </TouchableOpacity>
+          />
+          <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
+            <LinearGradient
+              colors={[AppColors.accentCyan, AppColors.accentViolet]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.loginGradient}
+            >
+              <Text style={styles.loginText}>Log In</Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
       </LinearGradient>
     </View>
@@ -75,37 +75,37 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-    content: {
-        width: "80%",
-        alignItems: "center",
-    },
-    title: {
-        fontSize: 32,
-        color: "#fff",
-        marginBottom: 40,
-        fontWeight: "bold",
-    },
-    input: {
-        width: "100%",
-        height: 50,
-        backgroundColor: "rgba(255, 255, 255, 0.1)",
-        borderRadius: 8,
-        paddingHorizontal: 15,
-        color: "#fff",
-        marginBottom: 20,
-    },
-    loginButton: {
-        width: "100%",
-        borderRadius: 8,
-    },
-    loginGradient: {
-        paddingVertical: 15,
-        borderRadius: 8,
-        alignItems: "center",
-    },
-    loginText: {
-        color: "#fff",
-        fontSize: 18,
-        fontWeight: "bold",
-    },
+  content: {
+    width: "80%",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 32,
+    color: "#fff",
+    marginBottom: 40,
+    fontWeight: "bold",
+  },
+  input: {
+    width: "100%",
+    height: 50,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    color: "#fff",
+    marginBottom: 20,
+  },
+  loginButton: {
+    width: "100%",
+    borderRadius: 8,
+  },
+  loginGradient: {
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  loginText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
 });

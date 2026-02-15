@@ -32,7 +32,7 @@ const App: React.FC = () => {
         // Register backends (per docs: https://docs.runanywhere.ai/react-native/quick-start)
         const { LlamaCPP } = await import('@runanywhere/llamacpp');
         const { ONNX } = await import('@runanywhere/onnx');
-        
+
         LlamaCPP.register();
         ONNX.register();
 
@@ -76,31 +76,6 @@ const App: React.FC = () => {
               name="Home"
               component={HomeScreen}
               options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Chat"
-              component={ChatScreen}
-              options={{ title: 'Chat' }}
-            />
-            <Stack.Screen
-              name="ToolCalling"
-              component={ToolCallingScreen}
-              options={{ title: 'Tool Calling' }}
-            />
-            <Stack.Screen
-              name="SpeechToText"
-              component={SpeechToTextScreen}
-              options={{ title: 'Speech to Text' }}
-            />
-            <Stack.Screen
-              name="TextToSpeech"
-              component={TextToSpeechScreen}
-              options={{ title: 'Text to Speech' }}
-            />
-            <Stack.Screen
-              name="VoicePipeline"
-              component={VoicePipelineScreen}
-              options={{ title: 'Voice Pipeline' }}
             />
           </Stack.Navigator>
         </NavigationContainer>
