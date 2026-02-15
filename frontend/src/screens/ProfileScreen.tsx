@@ -386,7 +386,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                 {saving ? (
                   <ActivityIndicator color="#fff" />
                 ) : (
-                  <Text style={styles.saveText}>Home</Text>
+                  <Text style={styles.saveText}>Save</Text>
                 )}
               </LinearGradient>
             </TouchableOpacity>
