@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   ScrollView,
   ActivityIndicator,
   RefreshControl,
+  NativeModules,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -15,6 +16,130 @@ import { useFocusEffect } from '@react-navigation/native';
 import { AppColors } from '../theme';
 import { RootStackParamList } from '../navigation/types';
 import { getPatientInfo, getEmergencyContacts, PatientInfo, logout } from '../services/api';
+import { ModelLoaderWidget } from '../components';
+import { useModelService } from '../services/ModelService';
+import RNFS from 'react-native-fs';
+import { RunAnywhere } from '@runanywhere/core';
+
+// Native Audio Module for better audio session management
+const { NativeAudioModule } = NativeModules;
+
+const SAMPLE_TEXTS = [
+  'Hello! Welcome to RunAnywhere. Experience the power of on-device AI.',
+  'The quick brown fox jumps over the lazy dog.',
+  'Technology is best when it brings people together.',
+  'Privacy is not something that I am merely entitled to, it is an absolute prerequisite.',
+];
+
+const TextToSpeech: React.FC = () => {
+  const modelService = useModelService();
+  const [text, setText] = useState('');
+  const [isSynthesizing, setIsSynthesizing] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [speechRate, setSpeechRate] = useState(1.0);
+  const [currentAudioPath, setCurrentAudioPath] = useState<string | null>(null);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (NativeAudioModule && isPlaying) {
+        NativeAudioModule.stopPlayback().catch(() => {});
+      }
+    };
+  }, [isPlaying]);
+
+  const synthesizeAndPlay = async () => {
+    if (!text.trim()) {
+      return;
+    }
+
+    setIsSynthesizing(true);
+
+    try {
+      // Per docs: https://docs.runanywhere.ai/react-native/tts/synthesize
+      // result.audio contains base64-encoded float32 PCM
+      // Using same config as sample app for consistent voice output
+      const result = await RunAnywhere.synthesize(text, { 
+        voice: 'default',
+        rate: speechRate,
+        pitch: 1.0,
+        volume: 1.0,
+      });
+
+      console.log(`[TTS] Synthesized: duration=${result.duration}s, sampleRate=${result.sampleRate}Hz, numSamples=${result.numSamples}`);
+
+      // Use SDK's built-in WAV converter (same as sample app)
+      const tempPath = await RunAnywhere.Audio.createWavFromPCMFloat32(
+        result.audio,
+        result.sampleRate || 22050
+      );
+
+      console.log(`[TTS] WAV file created: ${tempPath}`);
+
+      setCurrentAudioPath(tempPath);
+      setIsSynthesizing(false);
+      setIsPlaying(true);
+
+      // Play using native audio module
+      if (NativeAudioModule) {
+        try {
+          const playResult = await NativeAudioModule.playAudio(tempPath);
+          console.log(`[TTS] Playback started, duration: ${playResult.duration}s`);
+          
+          // Wait for playback to complete (approximate based on duration)
+          setTimeout(() => {
+            setIsPlaying(false);
+            setCurrentAudioPath(null);
+            // Clean up file
+            RNFS.unlink(tempPath).catch(() => {});
+          }, (result.duration + 0.5) * 1000);
+        } catch (playError) {
+          console.error('[TTS] Native playback error:', playError);
+          setIsPlaying(false);
+        }
+      } else {
+        console.error('[TTS] NativeAudioModule not available');
+        setIsPlaying(false);
+      }
+    } catch (error) {
+      console.error('[TTS] Error:', error);
+      setIsSynthesizing(false);
+      setIsPlaying(false);
+    }
+  };
+
+  const stopPlayback = async () => {
+    if (NativeAudioModule) {
+      try {
+        await NativeAudioModule.stopPlayback();
+      } catch (e) {
+        // Ignore
+      }
+    }
+    setIsPlaying(false);
+    
+    // Clean up file
+    if (currentAudioPath) {
+      RNFS.unlink(currentAudioPath).catch(() => {});
+      setCurrentAudioPath(null);
+    }
+  };
+
+  if (!modelService.isTTSLoaded) {
+    return (
+      <ModelLoaderWidget
+        title="TTS Voice Required"
+        subtitle="Download and load the voice synthesis model"
+        icon="volume"
+        accentColor={AppColors.accentPink}
+        isDownloading={modelService.isTTSDownloading}
+        isLoading={modelService.isTTSLoading}
+        progress={modelService.ttsDownloadProgress}
+        onLoad={modelService.downloadAndLoadTTS}
+      />
+    );
+  }
+};
 
 type HomeScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -114,7 +239,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                         <Text style={styles.summaryLabel}>CONDITION SUMMARY</Text>
                         <TouchableOpacity
                           style={styles.ttsButton}
-                          onPress={() => {/* rohanldinio will take care */}}
+                          onPress={() => {
+                           /*wip*/;  
+
+                          }}
                         >
                           <Text style={styles.ttsButtonIcon}>🔊</Text>
                           {/*The forbidden emojis lol*/}
