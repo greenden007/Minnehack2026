@@ -117,6 +117,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                           onPress={() => {/* rohanldinio will take care */}}
                         >
                           <Text style={styles.ttsButtonIcon}>🔊</Text>
+                          {/*The forbidden emojis lol*/}
                         </TouchableOpacity>
                       </View>
                       <Text style={styles.summaryText}>

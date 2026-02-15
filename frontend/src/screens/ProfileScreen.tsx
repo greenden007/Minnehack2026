@@ -328,6 +328,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                   disabled={isTranscribing}>
                   <Text>
                     {isRecording ? '⏹' : '🎤'}
+                    {/*The forbidden emojis lol*/}
                   </Text>
                 </Text>
               </View>
