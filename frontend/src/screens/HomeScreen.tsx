@@ -17,16 +17,13 @@ import { useFocusEffect } from '@react-navigation/native';
 import { AppColors } from '../theme';
 import { RootStackParamList } from '../navigation/types';
 import { getPatientInfo, getEmergencyContacts, PatientInfo, logout } from '../services/api';
-<<<<<<< HEAD
 import RNFS from 'react-native-fs';
 import { RunAnywhere } from '@runanywhere/core';
 import { useModelService } from '../services/ModelService';
 import { ModelLoaderWidget } from '../components';
 
 const { NativeAudioModule } = NativeModules;
-=======
 import { liveActivityService } from '../services/LiveActivityService';
->>>>>>> 929cefd03730caaa238672fd8652640313bbb6aa
 
 type HomeScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -247,12 +244,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                         <Text style={styles.summaryLabel}>CONDITION SUMMARY</Text>
                         <TouchableOpacity
                           style={styles.ttsButton}
-<<<<<<< HEAD
                           onPress={isPlaying ? stopPlayback : synthesizeAndPlay}
                           disabled={isSynthesizing || !text.trim()}
-=======
-                          onPress={() => {/* rohanldinio will take care */ }}
->>>>>>> 929cefd03730caaa238672fd8652640313bbb6aa
                         >
                           <Text>
                             {isSynthesizing ? '⏳' : isPlaying ? '⏹' : '▶️'}
