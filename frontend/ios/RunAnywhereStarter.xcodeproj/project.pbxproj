@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,14 @@
 		7699B88040F8A987B510C191 /* libPods-RunAnywhereStarter-RunAnywhereStarterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-RunAnywhereStarter-RunAnywhereStarterTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		95FAA6247F992A3A1B818127 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		F8A5E44F2F41D27D00B7A286 /* RCTNativeLocalStorage.mm in Sources */ = {isa = PBXBuildFile; fileRef = F8A5E44E2F41D27D00B7A286 /* RCTNativeLocalStorage.mm */; };
+		F8A5E4512F41D39700B7A286 /* MySwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5E4502F41D39700B7A286 /* MySwift.swift */; };
+		F8A5E4542F41D79F00B7A286 /* CountAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5E4532F41D79F00B7A286 /* CountAttribute.swift */; };
+		F8A5E4562F41D83300B7A286 /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5E4552F41D83300B7A286 /* LiveActivityManager.swift */; };
+		F8A5E45D2F41DC6C00B7A286 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A5E45C2F41DC6C00B7A286 /* WidgetKit.framework */; };
+		F8A5E45F2F41DC6C00B7A286 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A5E45E2F41DC6C00B7A286 /* SwiftUI.framework */; };
+		F8A5E46C2F41DC6E00B7A286 /* RespondrWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F8A5E45B2F41DC6B00B7A286 /* RespondrWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F8A5E4742F41DD2F00B7A286 /* CountAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A5E4532F41D79F00B7A286 /* CountAttribute.swift */; };
 		NATIVE_AUDIO_OBJC /* NativeAudioModule.m in Sources */ = {isa = PBXBuildFile; fileRef = NATIVE_AUDIO_OBJC_REF /* NativeAudioModule.m */; };
 		NATIVE_AUDIO_SWIFT /* NativeAudioModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = NATIVE_AUDIO_SWIFT_REF /* NativeAudioModule.swift */; };
 /* End PBXBuildFile section */
@@ -27,7 +35,28 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = RunAnywhereStarter;
 		};
+		F8A5E46A2F41DC6E00B7A286 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F8A5E45A2F41DC6B00B7A286;
+			remoteInfo = RespondrWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F8A5E4712F41DC6E00B7A286 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F8A5E46C2F41DC6E00B7A286 /* RespondrWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* RunAnywhereStarterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunAnywhereStarterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,9 +78,54 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-RunAnywhereStarter-RunAnywhereStarterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunAnywhereStarter-RunAnywhereStarterTests.release.xcconfig"; path = "Target Support Files/Pods-RunAnywhereStarter-RunAnywhereStarterTests/Pods-RunAnywhereStarter-RunAnywhereStarterTests.release.xcconfig"; sourceTree = "<group>"; };
 		BRIDGING_HEADER_REF /* RunAnywhereStarter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RunAnywhereStarter-Bridging-Header.h"; path = "RunAnywhereStarter/RunAnywhereStarter-Bridging-Header.h"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F8A5E44D2F41D27D00B7A286 /* RCTNativeLocalStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTNativeLocalStorage.h; sourceTree = "<group>"; };
+		F8A5E44E2F41D27D00B7A286 /* RCTNativeLocalStorage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTNativeLocalStorage.mm; sourceTree = "<group>"; };
+		F8A5E4502F41D39700B7A286 /* MySwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySwift.swift; sourceTree = "<group>"; };
+		F8A5E4522F41D44100B7A286 /* RunAnywhereStarter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RunAnywhereStarter-Bridging-Header.h"; sourceTree = "<group>"; };
+		F8A5E4532F41D79F00B7A286 /* CountAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountAttribute.swift; sourceTree = "<group>"; };
+		F8A5E4552F41D83300B7A286 /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
+		F8A5E45B2F41DC6B00B7A286 /* RespondrWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RespondrWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8A5E45C2F41DC6C00B7A286 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F8A5E45E2F41DC6C00B7A286 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F8A5E4722F41DC9E00B7A286 /* RunAnywhereStarter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RunAnywhereStarter.entitlements; path = RunAnywhereStarter/RunAnywhereStarter.entitlements; sourceTree = "<group>"; };
+		F8A5E4732F41DCC700B7A286 /* RespondrWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RespondrWidgetExtension.entitlements; sourceTree = "<group>"; };
 		NATIVE_AUDIO_OBJC_REF /* NativeAudioModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NativeAudioModule.m; path = RunAnywhereStarter/NativeAudioModule.m; sourceTree = "<group>"; };
 		NATIVE_AUDIO_SWIFT_REF /* NativeAudioModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NativeAudioModule.swift; path = RunAnywhereStarter/NativeAudioModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F8A5E46D2F41DC6E00B7A286 /* Exceptions for "RespondrWidget" folder in "RespondrWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F8A5E45A2F41DC6B00B7A286 /* RespondrWidgetExtension */;
+		};
+		F8A5E4782F41DDE100B7A286 /* Exceptions for "RespondrWidget" folder in "RunAnywhereStarter" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				IncrementIntent.swift,
+				LiveActivityView.swift,
+			);
+			target = 13B07F861A680F5B00A75B9A /* RunAnywhereStarter */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F8A5E4602F41DC6C00B7A286 /* RespondrWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F8A5E4782F41DDE100B7A286 /* Exceptions for "RespondrWidget" folder in "RunAnywhereStarter" target */,
+				F8A5E46D2F41DC6E00B7A286 /* Exceptions for "RespondrWidget" folder in "RespondrWidgetExtension" target */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = RespondrWidget;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		00E356EB1AD99517003FC87E /* Frameworks */ = {
@@ -67,6 +141,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-RunAnywhereStarter.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8A5E4582F41DC6B00B7A286 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8A5E45F2F41DC6C00B7A286 /* SwiftUI.framework in Frameworks */,
+				F8A5E45D2F41DC6C00B7A286 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +176,7 @@
 		13B07FAE1A68108700A75B9A /* RunAnywhereStarter */ = {
 			isa = PBXGroup;
 			children = (
+				F8A5E4722F41DC9E00B7A286 /* RunAnywhereStarter.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -113,6 +197,8 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-RunAnywhereStarter.a */,
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-RunAnywhereStarter-RunAnywhereStarterTests.a */,
+				F8A5E45C2F41DC6C00B7A286 /* WidgetKit.framework */,
+				F8A5E45E2F41DC6C00B7A286 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,9 +213,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F8A5E4732F41DCC700B7A286 /* RespondrWidgetExtension.entitlements */,
+				F8A5E44C2F41D23700B7A286 /* NativeLocalStorage */,
 				13B07FAE1A68108700A75B9A /* RunAnywhereStarter */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RunAnywhereStarterTests */,
+				F8A5E4602F41DC6C00B7A286 /* RespondrWidget */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -144,6 +233,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* RunAnywhereStarter.app */,
 				00E356EE1AD99517003FC87E /* RunAnywhereStarterTests.xctest */,
+				F8A5E45B2F41DC6B00B7A286 /* RespondrWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +247,19 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-RunAnywhereStarter-RunAnywhereStarterTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F8A5E44C2F41D23700B7A286 /* NativeLocalStorage */ = {
+			isa = PBXGroup;
+			children = (
+				F8A5E44D2F41D27D00B7A286 /* RCTNativeLocalStorage.h */,
+				F8A5E44E2F41D27D00B7A286 /* RCTNativeLocalStorage.mm */,
+				F8A5E4502F41D39700B7A286 /* MySwift.swift */,
+				F8A5E4522F41D44100B7A286 /* RunAnywhereStarter-Bridging-Header.h */,
+				F8A5E4532F41D79F00B7A286 /* CountAttribute.swift */,
+				F8A5E4552F41D83300B7A286 /* LiveActivityManager.swift */,
+			);
+			path = NativeLocalStorage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,15 +297,37 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
 				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				F8A5E4712F41DC6E00B7A286 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F8A5E46B2F41DC6E00B7A286 /* PBXTargetDependency */,
 			);
 			name = RunAnywhereStarter;
 			productName = RunAnywhereStarter;
 			productReference = 13B07F961A680F5B00A75B9A /* RunAnywhereStarter.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F8A5E45A2F41DC6B00B7A286 /* RespondrWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8A5E46E2F41DC6E00B7A286 /* Build configuration list for PBXNativeTarget "RespondrWidgetExtension" */;
+			buildPhases = (
+				F8A5E4572F41DC6B00B7A286 /* Sources */,
+				F8A5E4582F41DC6B00B7A286 /* Frameworks */,
+				F8A5E4592F41DC6B00B7A286 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F8A5E4602F41DC6C00B7A286 /* RespondrWidget */,
+			);
+			name = RespondrWidgetExtension;
+			productName = RespondrWidgetExtension;
+			productReference = F8A5E45B2F41DC6B00B7A286 /* RespondrWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -210,6 +335,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -218,6 +344,9 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1120;
+					};
+					F8A5E45A2F41DC6B00B7A286 = {
+						CreatedOnToolsVersion = 26.2;
 					};
 				};
 			};
@@ -236,6 +365,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* RunAnywhereStarter */,
 				00E356ED1AD99517003FC87E /* RunAnywhereStarterTests */,
+				F8A5E45A2F41DC6B00B7A286 /* RespondrWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -255,6 +385,13 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				95FAA6247F992A3A1B818127 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8A5E4592F41DC6B00B7A286 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,9 +542,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				F8A5E4542F41D79F00B7A286 /* CountAttribute.swift in Sources */,
+				F8A5E4512F41D39700B7A286 /* MySwift.swift in Sources */,
+				F8A5E44F2F41D27D00B7A286 /* RCTNativeLocalStorage.mm in Sources */,
+				F8A5E4562F41D83300B7A286 /* LiveActivityManager.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				NATIVE_AUDIO_SWIFT /* NativeAudioModule.swift in Sources */,
 				NATIVE_AUDIO_OBJC /* NativeAudioModule.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F8A5E4572F41DC6B00B7A286 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8A5E4742F41DD2F00B7A286 /* CountAttribute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +567,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* RunAnywhereStarter */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		F8A5E46B2F41DC6E00B7A286 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F8A5E45A2F41DC6B00B7A286 /* RespondrWidgetExtension */;
+			targetProxy = F8A5E46A2F41DC6E00B7A286 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -479,11 +633,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RunAnywhereStarter/RunAnywhereStarter.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L86FH3K93L;
+				DEVELOPMENT_TEAM = 538R87VAFJ;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = RunAnywhereStarter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -509,10 +664,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RunAnywhereStarter/RunAnywhereStarter.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L86FH3K93L;
+				DEVELOPMENT_TEAM = 538R87VAFJ;
 				INFOPLIST_FILE = RunAnywhereStarter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -680,8 +836,102 @@
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "RunAnywhereStarter-Bridging-Header";
 				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F8A5E46F2F41DC6E00B7A286 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = RespondrWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 538R87VAFJ;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RespondrWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RespondrWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.RunAnywhereStarter.RespondrWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F8A5E4702F41DC6E00B7A286 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = RespondrWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 538R87VAFJ;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RespondrWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RespondrWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.RunAnywhereStarter.RespondrWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -711,6 +961,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F8A5E46E2F41DC6E00B7A286 /* Build configuration list for PBXNativeTarget "RespondrWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8A5E46F2F41DC6E00B7A286 /* Debug */,
+				F8A5E4702F41DC6E00B7A286 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

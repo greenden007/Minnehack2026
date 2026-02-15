@@ -10,6 +10,8 @@
 #endif
 #endif
 
+#import "NativeLocalStorageSpec/NativeLocalStorageSpec.h"
+#import "NativeLocalStorageSpecJSI.h"
 #import "NitroModulesSpec/NitroModulesSpec.h"
 #import "NitroModulesSpecJSI.h"
 #import "RCTModuleProviders.h"
@@ -28,6 +30,8 @@
 #import "react/renderer/components/safeareacontext/RCTComponentViewHelpers.h"
 #import "react/renderer/components/safeareacontext/ShadowNodes.h"
 #import "react/renderer/components/safeareacontext/States.h"
+#import "rnasyncstorage/rnasyncstorage.h"
+#import "rnasyncstorageJSI.h"
 #import "rngesturehandler_codegen/rngesturehandler_codegen.h"
 #import "rngesturehandler_codegenJSI.h"
 #import "safeareacontext/safeareacontext.h"
