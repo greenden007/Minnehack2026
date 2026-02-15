@@ -214,7 +214,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                 {saving ? (
                   <ActivityIndicator color="#fff" />
                 ) : (
-                  <Text style={styles.saveText}>Save Profile</Text>
+                  <Text style={styles.saveText}>Home</Text>
                 )}
               </LinearGradient>
             </TouchableOpacity>
@@ -344,13 +344,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   saveGradient: {
-    paddingVertical: 16,
+    paddingVertical: 2,
     alignItems: 'center',
     borderRadius: 12,
   },
   saveText: {
     color: '#fff',
-    fontSize: 17,
+    fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Cochin',
   },
 });

@@ -168,7 +168,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 style={styles.editGradient}
               >
                 <Text style={styles.editButtonText}>
-                  {hasProfile ? 'Edit Medical Profile' : 'Set Up Medical Profile'}
+                  {'Profile'}
                 </Text>
               </LinearGradient>
             </TouchableOpacity>
@@ -351,13 +351,14 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   editGradient: {
-    paddingVertical: 16,
+    paddingVertical: 2,
     alignItems: 'center',
     borderRadius: 12,
   },
   editButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Cochin',
   },
 });

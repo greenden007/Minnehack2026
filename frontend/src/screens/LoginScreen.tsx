@@ -274,17 +274,18 @@ const styles = StyleSheet.create({
   submitButton: {
     width: '100%',
     marginTop: 6,
-    borderRadius: 10,
+    borderRadius: 12,
     minHeight: 48,
   },
   submitGradient: {
-    paddingVertical: 14,
+    paddingVertical: 2,
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 12,
   },
   submitText: {
     color: '#fff',
-    fontSize: 17,
+    fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Cochin',
   },
 });
