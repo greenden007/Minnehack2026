@@ -68,34 +68,90 @@
     "OTHER_SWIFT_FLAGS": "$(inherited) -DRCT_NEW_ARCH_ENABLED"
   },
   "dependencies": {
-    "React-jsi": [],
-    "React-callinvoker": [],
-    "React-Core": [],
-    "React-RCTFabric": [],
-    "ReactCodegen": [],
-    "RCTRequired": [],
-    "RCTTypeSafety": [],
-    "ReactCommon/turbomodule/bridging": [],
-    "ReactCommon/turbomodule/core": [],
-    "React-NativeModulesApple": [],
-    "Yoga": [],
-    "React-Fabric": [],
-    "React-graphics": [],
-    "React-utils": [],
-    "React-featureflags": [],
-    "React-debug": [],
-    "React-ImageManager": [],
-    "React-rendererdebug": [],
-    "React-renderercss": [],
-    "hermes-engine": [],
-    "glog": [],
-    "boost": [],
-    "DoubleConversion": [],
-    "fast_float": [],
-    "fmt": [],
-    "RCT-Folly": [],
-    "SocketRocket": [],
-    "RCT-Folly/Fabric": []
+    "React-jsi": [
+
+    ],
+    "React-callinvoker": [
+
+    ],
+    "React-Core": [
+
+    ],
+    "React-RCTFabric": [
+
+    ],
+    "ReactCodegen": [
+
+    ],
+    "RCTRequired": [
+
+    ],
+    "RCTTypeSafety": [
+
+    ],
+    "ReactCommon/turbomodule/bridging": [
+
+    ],
+    "ReactCommon/turbomodule/core": [
+
+    ],
+    "React-NativeModulesApple": [
+
+    ],
+    "Yoga": [
+
+    ],
+    "React-Fabric": [
+
+    ],
+    "React-graphics": [
+
+    ],
+    "React-utils": [
+
+    ],
+    "React-featureflags": [
+
+    ],
+    "React-debug": [
+
+    ],
+    "React-ImageManager": [
+
+    ],
+    "React-rendererdebug": [
+
+    ],
+    "React-renderercss": [
+
+    ],
+    "hermes-engine": [
+
+    ],
+    "glog": [
+
+    ],
+    "boost": [
+
+    ],
+    "DoubleConversion": [
+
+    ],
+    "fast_float": [
+
+    ],
+    "fmt": [
+
+    ],
+    "RCT-Folly": [
+
+    ],
+    "SocketRocket": [
+
+    ],
+    "RCT-Folly/Fabric": [
+
+    ]
   },
   "compiler_flags": "-DRCT_NEW_ARCH_ENABLED=1"
 }
