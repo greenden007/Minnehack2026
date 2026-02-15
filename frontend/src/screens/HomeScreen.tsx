@@ -17,12 +17,16 @@ import { useFocusEffect } from '@react-navigation/native';
 import { AppColors } from '../theme';
 import { RootStackParamList } from '../navigation/types';
 import { getPatientInfo, getEmergencyContacts, PatientInfo, logout } from '../services/api';
+<<<<<<< HEAD
 import RNFS from 'react-native-fs';
 import { RunAnywhere } from '@runanywhere/core';
 import { useModelService } from '../services/ModelService';
 import { ModelLoaderWidget } from '../components';
 
 const { NativeAudioModule } = NativeModules;
+=======
+import { liveActivityService } from '../services/LiveActivityService';
+>>>>>>> 929cefd03730caaa238672fd8652640313bbb6aa
 
 type HomeScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -49,6 +53,19 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       setInfo(patientInfo);
       setText(patientInfo.issueSummarization);
       setEmergencyNums(contacts.emergencyContactNums);
+
+      // Start/Update Live Activity with dynamic data
+      if (patientInfo) {
+        const patientName = `${patientInfo.firstName} ${patientInfo.lastName}`;
+        const issue = patientInfo.issueSummarization || "No condition summary available";
+        const status = patientInfo.doctorApproved ? "Doctor Verified" : "Pending Verification";
+
+        try {
+          await liveActivityService.startActivity(patientName, status, issue);
+        } catch (err) {
+          console.error('Failed to start Live Activity:', err);
+        }
+      }
     } catch (error) {
       console.error('Failed to load data:', error);
     } finally {
@@ -79,6 +96,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
   const handleLogout = async () => {
     try {
+      await liveActivityService.endActivity();
       await logout();
     } catch (error) {
       console.error('Logout failed:', error);
@@ -229,8 +247,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                         <Text style={styles.summaryLabel}>CONDITION SUMMARY</Text>
                         <TouchableOpacity
                           style={styles.ttsButton}
+<<<<<<< HEAD
                           onPress={isPlaying ? stopPlayback : synthesizeAndPlay}
                           disabled={isSynthesizing || !text.trim()}
+=======
+                          onPress={() => {/* rohanldinio will take care */ }}
+>>>>>>> 929cefd03730caaa238672fd8652640313bbb6aa
                         >
                           <Text>
                             {isSynthesizing ? '⏳' : isPlaying ? '⏹' : '▶️'}
