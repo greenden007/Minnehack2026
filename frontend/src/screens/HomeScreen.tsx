@@ -71,14 +71,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         end={{ x: 1, y: 1 }}
         style={styles.gradient}
       >
-        {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Respondr</Text>
           <TouchableOpacity onPress={handleLogout}>
             <Text style={styles.logoutText}>Log Out</Text>
           </TouchableOpacity>
         </View>
-
         {loading ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color={AppColors.accentCyan} />
@@ -94,7 +92,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
               />
             }
           >
-            {/* Notification Preview Card */}
             <View style={styles.notificationCard}>
               <View style={styles.notificationHeader}>
                 <View style={styles.notificationDot} />
@@ -142,8 +139,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 </View>
               )}
             </View>
-
-            {/* Emergency Contacts Card */}
             <View style={styles.card}>
               <Text style={styles.cardTitle}>Emergency Contacts</Text>
               {emergencyNums.length > 0 ? (
@@ -159,8 +154,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 </Text>
               )}
             </View>
-
-            {/* Quick Actions */}
             <TouchableOpacity
               style={styles.editButton}
               onPress={() => navigation.navigate('Profile')}

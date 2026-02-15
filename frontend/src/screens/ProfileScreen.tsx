@@ -115,7 +115,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
         end={{ x: 1, y: 1 }}
         style={styles.gradient}
       >
-        {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.backText}>Back</Text>
@@ -139,8 +138,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                 </Text>
               </View>
             )}
-
-            {/* Condition Summary */}
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Condition Summary</Text>
               <Text style={styles.sectionHint}>
@@ -156,8 +153,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                 multiline
               />
             </View>
-
-            {/* Full Medical Info */}
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Detailed Medical Info</Text>
               <Text style={styles.sectionHint}>
@@ -174,8 +169,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                 textAlignVertical="top"
               />
             </View>
-
-            {/* Emergency Contacts */}
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Emergency Contacts</Text>
               <Text style={styles.sectionHint}>
@@ -205,8 +198,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
             </View>
-
-            {/* Save Button */}
             <TouchableOpacity
               onPress={handleSave}
               disabled={saving}
