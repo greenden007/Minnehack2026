@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface PatientInfo {
   username: string;
@@ -10,12 +11,37 @@ export interface PatientInfo {
   doctorApproved: boolean;
 }
 
-export interface getEmergencyContacts {
+const url = 'https://0f54-2607-ea00-107-3407-25b1-e8db-44d4-9ab5.ngrok-free.app/api';
+
+export interface EmergencyContactsResponse {
   emergencyContactNums: string[];
 }
 
-export async function login(credentials: { email: string; password: string }): Promise<void> {
-  const response = await fetch('http://localhost:3000/api/auth/login', {
+const TOKEN_KEY = 'authToken';
+
+export async function getToken(): Promise<string | null> {
+  return AsyncStorage.getItem(TOKEN_KEY);
+}
+
+export async function saveToken(token: string): Promise<void> {
+  await AsyncStorage.setItem(TOKEN_KEY, token);
+}
+
+export async function clearToken(): Promise<void> {
+  await AsyncStorage.removeItem(TOKEN_KEY);
+}
+
+async function authHeaders(): Promise<Record<string, string>> {
+  const token = await getToken();
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers['Authorization'] = token;
+  }
+  return headers;
+}
+
+export async function login(credentials: { email: string; password: string }): Promise<string> {
+  const response = await fetch(`${url}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(credentials),
@@ -24,6 +50,10 @@ export async function login(credentials: { email: string; password: string }): P
     const errorData = await response.json();
     throw new Error(errorData.message || 'Login failed');
   }
+  const data = await response.json();
+  const token = data.token || data;
+  await saveToken(typeof token === 'string' ? token : JSON.stringify(token));
+  return token;
 }
 
 export async function signup(data: {
@@ -33,8 +63,8 @@ export async function signup(data: {
   password: string;
   username: string;
   emergencyContactNums?: string[];
-}): Promise<void> {
-  const response = await fetch('http://localhost:3000/api/auth/signup', {
+}): Promise<string> {
+  const response = await fetch(`${url}/auth/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
@@ -43,12 +73,17 @@ export async function signup(data: {
     const errorData = await response.json();
     throw new Error(errorData.message || 'Signup failed');
   }
+  const resData = await response.json();
+  const token = resData.token || resData;
+  await saveToken(typeof token === 'string' ? token : JSON.stringify(token));
+  return token;
 }
 
 export async function getPatientInfo(): Promise<PatientInfo> {
-  const response = await fetch('http://localhost:3000/api/info/getInfo', {
+  const headers = await authHeaders();
+  const response = await fetch(`${url}/info/getInfo`, {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
   });
   if (!response.ok) {
     throw new Error('Failed to fetch patient info');
@@ -56,10 +91,11 @@ export async function getPatientInfo(): Promise<PatientInfo> {
   return response.json();
 }
 
-export async function getEmergencyContacts(): Promise<getEmergencyContacts> {
-  const response = await fetch('http://localhost:3000/api/info/getNumbers', {
+export async function getEmergencyContacts(): Promise<EmergencyContactsResponse> {
+  const headers = await authHeaders();
+  const response = await fetch(`${url}/info/getNumbers`, {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
   });
   if (!response.ok) {
     throw new Error('Failed to fetch emergency contacts');
@@ -67,23 +103,23 @@ export async function getEmergencyContacts(): Promise<getEmergencyContacts> {
   return response.json();
 }
 
-export async function logout(data: {
-  username: string;
-}): Promise<void> {
-  const response = await fetch('http://localhost:3000/api/auth/logout', {
+export async function logout(): Promise<void> {
+  const headers = await authHeaders();
+  const response = await fetch(`${url}/auth/logout`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    headers,
   });
+  await clearToken();
   if (!response.ok) {
     throw new Error('Logout failed');
   }
 }
 
 export async function updatePatientInfo(data: Partial<PatientInfo>): Promise<void> {
-  const response = await fetch('http://localhost:3000/api/info/updateInfo', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+  const headers = await authHeaders();
+  const response = await fetch(`${url}/info/updateInfo`, {
+    method: 'PATCH',
+    headers,
     body: JSON.stringify(data),
   });
   if (!response.ok) {
@@ -93,9 +129,10 @@ export async function updatePatientInfo(data: Partial<PatientInfo>): Promise<voi
 }
 
 export async function updateEmergencyContacts(contacts: string[]): Promise<void> {
-  const response = await fetch('http://localhost:3000/api/info/updateNumbers', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+  const headers = await authHeaders();
+  const response = await fetch(`${url}/info/updateNumbers`, {
+    method: 'PATCH',
+    headers,
     body: JSON.stringify({ emergencyContactNums: contacts }),
   });
   if (!response.ok) {

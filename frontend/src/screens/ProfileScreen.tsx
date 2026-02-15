@@ -333,6 +333,7 @@ const styles = StyleSheet.create({
   saveButton: {
     borderRadius: 12,
     overflow: 'hidden',
+    minHeight: 48,
     marginTop: 4,
   },
   saveGradient: {

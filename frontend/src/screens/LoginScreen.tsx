@@ -94,7 +94,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             <Text style={styles.tagline}>Your emergency medical profile</Text>
 
             <View style={styles.card}>
-              {/* Tab Toggle */}
               <View style={styles.tabRow}>
                 <TouchableOpacity
                   style={[styles.tab, !isSignUp && styles.tabActive]}
@@ -158,7 +157,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 placeholderTextColor={AppColors.textMuted}
                 value={password}
                 onChangeText={setPassword}
-                secureTextEntry
+                secureTextEntry = {false}
               />
               {isSignUp && (
                 <TextInput
@@ -167,7 +166,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                   placeholderTextColor={AppColors.textMuted}
                   value={confirmPassword}
                   onChangeText={setConfirmPassword}
-                  secureTextEntry
+                  secureTextEntry = {false}
                 />
               )}
 
@@ -280,6 +279,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
     borderRadius: 10,
     overflow: 'hidden',
+    minHeight: 48,
   },
   submitGradient: {
     paddingVertical: 14,

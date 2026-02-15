@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler'; // Must be at the top!
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import { StatusBar } from 'react-native';
+import { StatusBar, ActivityIndicator, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 // Note: react-native-screens is shimmed in index.js for iOS New Architecture compatibility
 import { RunAnywhere, SDKEnvironment } from '@runanywhere/core';
@@ -14,29 +14,33 @@ import {
   ProfileScreen
 } from './screens';
 import { RootStackParamList } from './navigation/types';
+import { getToken } from './services/api';
 
 // Using JS-based stack navigator instead of native-stack
 // to avoid react-native-screens setColor crash with New Architecture
 const Stack = createStackNavigator<RootStackParamList>();
 
 const App: React.FC = () => {
+  const [initialRoute, setInitialRoute] = useState<keyof RootStackParamList | null>(null);
+
   useEffect(() => {
-    // Initialize SDK
-    const initializeSDK = async () => {
+    const init = async () => {
+      // Check for existing auth token
+      const token = await getToken();
+      setInitialRoute(token ? 'Home' : 'Login');
+
+      // Initialize SDK
       try {
-        // Initialize RunAnywhere SDK (Development mode doesn't require API key)
         await RunAnywhere.initialize({
           environment: SDKEnvironment.Development,
         });
 
-        // Register backends (per docs: https://docs.runanywhere.ai/react-native/quick-start)
         const { LlamaCPP } = await import('@runanywhere/llamacpp');
         const { ONNX } = await import('@runanywhere/onnx');
 
         LlamaCPP.register();
         ONNX.register();
 
-        // Register default models
         await registerDefaultModels();
 
         console.log('RunAnywhere SDK initialized successfully');
@@ -45,8 +49,16 @@ const App: React.FC = () => {
       }
     };
 
-    initializeSDK();
+    init();
   }, []);
+
+  if (!initialRoute) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: AppColors.primaryDark }}>
+        <ActivityIndicator size="large" color={AppColors.accentCyan} />
+      </View>
+    );
+  }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -54,7 +66,7 @@ const App: React.FC = () => {
         <StatusBar barStyle="light-content" backgroundColor={AppColors.primaryDark} />
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName={initialRoute}
             screenOptions={{
               headerShown: false,
               cardStyle: {

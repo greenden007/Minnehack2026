@@ -15,7 +15,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import { AppColors } from '../theme';
 import { RootStackParamList } from '../navigation/types';
 import { getPatientInfo, getEmergencyContacts, PatientInfo, logout } from '../services/api';
-// myabe other stuff too idk
 
 type HomeScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -56,7 +55,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const handleLogout = async () => {
-    await logout(info ? { username: info.username } : { username: '' });
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
     navigation.replace('Login');
   };
 
@@ -344,6 +347,7 @@ const styles = StyleSheet.create({
   editButton: {
     borderRadius: 12,
     overflow: 'hidden',
+    minHeight: 48,
   },
   editGradient: {
     paddingVertical: 16,
