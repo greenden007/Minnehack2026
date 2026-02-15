@@ -34,6 +34,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           >
             <Text style={styles.buttonText}>Go to Profile</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 10 }]}
+            onPress={() => navigation.navigate("LiveActivity")}
+          >
+            <Text style={styles.buttonText}>Live Activities</Text>
+          </TouchableOpacity>
         </View>
       </LinearGradient>
     </View>

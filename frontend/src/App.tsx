@@ -11,7 +11,8 @@ import { AppColors } from './theme';
 import {
   HomeScreen,
   LoginScreen,
-  ProfileScreen
+  ProfileScreen,
+  LiveActivityScreen
 } from './screens';
 import { RootStackParamList } from './navigation/types';
 
@@ -77,6 +78,9 @@ const App: React.FC = () => {
               component={HomeScreen}
               options={{ headerShown: false }}
             />
+            <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile' }} />
+            <Stack.Screen name="LiveActivity" component={LiveActivityScreen} options={{ title: 'Live Activities' }} />
           </Stack.Navigator>
         </NavigationContainer>
       </ModelServiceProvider>
