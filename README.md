@@ -1,4 +1,5 @@
-Phone app, set up by either people who know they have a condition that in times of emergency will not allow them to communicate what they need (like allergy), or by a doctor for its patient detailing a more advanced condition (like dementia). When configured, it can be a constant popup on the main phone screen, when pressed by first responders it can pop a brief screen asking whether this is an emergency (for privacy concerns), if pressed automatically call 911 and also show a preprepared text screen detailing the patient’s condition. Name still undecided.
+Phone app, set up by either people who know they have a condition that in times of emergency will not allow them to communicate what they need (like allergy), or by a doctor for its patient detailing a more advanced condition (like dementia). When configured, it can be a constant popup on the main phone screen, when pressed by first responders it can pop a brief screen asking whether this is an emergency (for privacy concerns), if pressed automatically call 911 and also show a preprepared text screen detailing the patient’s condition. Name still undecided, thinking towards respondr.
+
 
 # Minnehack 2026
 

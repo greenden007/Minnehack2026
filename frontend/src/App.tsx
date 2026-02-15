@@ -54,17 +54,9 @@ const App: React.FC = () => {
         <StatusBar barStyle="light-content" backgroundColor={AppColors.primaryDark} />
         <NavigationContainer>
           <Stack.Navigator
+            initialRouteName="Login"
             screenOptions={{
-              headerStyle: {
-                backgroundColor: AppColors.primaryDark,
-                elevation: 0,
-                shadowOpacity: 0,
-              },
-              headerTintColor: AppColors.textPrimary,
-              headerTitleStyle: {
-                fontWeight: '700',
-                fontSize: 18,
-              },
+              headerShown: false,
               cardStyle: {
                 backgroundColor: AppColors.primaryDark,
               },
@@ -72,11 +64,9 @@ const App: React.FC = () => {
               ...TransitionPresets.SlideFromRightIOS,
             }}
           >
-            <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-              options={{ headerShown: false }}
-            />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </ModelServiceProvider>
