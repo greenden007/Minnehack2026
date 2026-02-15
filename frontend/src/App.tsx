@@ -73,8 +73,8 @@ const App: React.FC = () => {
             }}
           >
             <Stack.Screen
-              name="Home"
-              component={HomeScreen}
+              name="Login"
+              component={LoginScreen}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
