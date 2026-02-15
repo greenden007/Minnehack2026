@@ -43,7 +43,7 @@ router.get('/getInfo', auth, async (req, res) => {
     }
 })
 
-router.update('/updateInfo', auth, async (req, res) => {
+router.patch('/updateInfo', auth, async (req, res) => {
     try {
         const { issueSummarization, fullInfo, doctorApproved, forms } = req.body;
         const info = await Info.findOneAndUpdate({ userId: req.user.id }, { issueSummarization, fullInfo, doctorApproved, forms }, { new: true });
