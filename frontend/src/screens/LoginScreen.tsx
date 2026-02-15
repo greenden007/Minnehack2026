@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,61 +6,190 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
-} from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { AppColors } from "../theme";
-import { RootStackParamList } from "../navigation/types";
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { AppColors } from '../theme';
+import { RootStackParamList } from '../navigation/types';
+import { login, signup } from '../services/api';
 
 type LoginScreenProps = {
-  navigation: StackNavigationProp<RootStackParamList, "Login">;
+  navigation: StackNavigationProp<RootStackParamList, 'Login'>;
 };
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    navigation.replace("Home");
+  const handleSubmit = async () => {
+    if (!email.trim() || !password.trim()) {
+      return;
+    }
+
+    if (isSignUp) {
+      if (!username.trim() || !firstName.trim()) {
+        return;
+      }
+      if (password !== confirmPassword) {
+        return;
+      }
+    }
+
+    setLoading(true);
+    try {
+      if (isSignUp) {
+        await signup({
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          email: email.trim().toLowerCase(),
+          password,
+          username: username.trim(),
+        });
+      } else {
+        await login({
+          email: email.trim().toLowerCase(),
+          password,
+        });
+      }
+      navigation.replace('Home');
+    } catch (error: any) {
+      Alert.alert('Error', error.message || 'Something went wrong.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       <LinearGradient
-        colors={[AppColors.primaryDark, "#0F1629", AppColors.primaryMid]}
+        colors={[AppColors.primaryDark, '#0F1629', AppColors.primaryMid]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.gradient}
       >
-        <View style={styles.content}>
-          <Text style={styles.title}>Welcome Back</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Username"
-            placeholderTextColor="#888"
-            value={username}
-            onChangeText={setUsername}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#888"
-            secureTextEntry
-            value={password}
-            onChangeText={setPassword}
-          />
-          <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
-            <LinearGradient
-              colors={[AppColors.accentCyan, AppColors.accentViolet]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.loginGradient}
-            >
-              <Text style={styles.loginText}>Log In</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardView}
+        >
+          <ScrollView
+            contentContainerStyle={styles.scrollContent}
+            keyboardShouldPersistTaps="handled"
+          >
+            <Text style={styles.appName}>Respondr</Text>
+            <Text style={styles.tagline}>Your emergency medical profile</Text>
+
+            <View style={styles.card}>
+              <View style={styles.tabRow}>
+                <TouchableOpacity
+                  style={[styles.tab, !isSignUp && styles.tabActive]}
+                  onPress={() => setIsSignUp(false)}
+                >
+                  <Text style={[styles.tabText, !isSignUp && styles.tabTextActive]}>
+                    Log In
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.tab, isSignUp && styles.tabActive]}
+                  onPress={() => setIsSignUp(true)}
+                >
+                  <Text style={[styles.tabText, isSignUp && styles.tabTextActive]}>
+                    Sign Up
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              {isSignUp && (
+                <>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Username *"
+                    placeholderTextColor={AppColors.textMuted}
+                    value={username}
+                    onChangeText={setUsername}
+                    autoCapitalize="none"
+                  />
+                  <View style={styles.nameRow}>
+                    <TextInput
+                      style={[styles.input, styles.nameInput]}
+                      placeholder="First Name *"
+                      placeholderTextColor={AppColors.textMuted}
+                      value={firstName}
+                      onChangeText={setFirstName}
+                    />
+                    <TextInput
+                      style={[styles.input, styles.nameInput]}
+                      placeholder="Last Name"
+                      placeholderTextColor={AppColors.textMuted}
+                      value={lastName}
+                      onChangeText={setLastName}
+                    />
+                  </View>
+                </>
+              )}
+
+              <TextInput
+                style={styles.input}
+                placeholder="Email *"
+                placeholderTextColor={AppColors.textMuted}
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Password *"
+                placeholderTextColor={AppColors.textMuted}
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry = {false}
+              />
+              {isSignUp && (
+                <TextInput
+                  style={styles.input}
+                  placeholder="Confirm Password *"
+                  placeholderTextColor={AppColors.textMuted}
+                  value={confirmPassword}
+                  onChangeText={setConfirmPassword}
+                  secureTextEntry = {false}
+                />
+              )}
+
+              <TouchableOpacity
+                onPress={handleSubmit}
+                disabled={loading}
+                style={styles.submitButton}
+              >
+                <LinearGradient
+                  colors={[AppColors.accentCyan, AppColors.accentViolet]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.submitGradient}
+                >
+                  {loading ? (
+                    <ActivityIndicator color="#fff" />
+                  ) : (
+                    <Text style={styles.submitText}>
+                      {isSignUp ? 'Create Account' : 'Log In'}
+                    </Text>
+                  )}
+                </LinearGradient>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </LinearGradient>
     </View>
   );
@@ -72,40 +201,91 @@ const styles = StyleSheet.create({
   },
   gradient: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
-  content: {
-    width: "80%",
-    alignItems: "center",
+  keyboardView: {
+    flex: 1,
   },
-  title: {
-    fontSize: 32,
-    color: "#fff",
-    marginBottom: 40,
-    fontWeight: "bold",
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingVertical: 40,
+  },
+  appName: {
+    fontSize: 38,
+    color: AppColors.textPrimary,
+    fontWeight: 'bold',
+    fontFamily: 'Georgia-Bold',
+    marginBottom: 6,
+  },
+  tagline: {
+    fontSize: 14,
+    color: AppColors.textSecondary,
+    marginBottom: 32,
+  },
+  card: {
+    width: '100%',
+    backgroundColor: AppColors.surfaceCard,
+    borderRadius: 16,
+    padding: 20,
+  },
+  tabRow: {
+    flexDirection: 'row',
+    backgroundColor: AppColors.primaryDark,
+    borderRadius: 10,
+    marginBottom: 20,
+    padding: 3,
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  tabActive: {
+    backgroundColor: AppColors.surfaceElevated,
+  },
+  tabText: {
+    color: AppColors.textMuted,
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  tabTextActive: {
+    color: AppColors.textPrimary,
   },
   input: {
-    width: "100%",
-    height: 50,
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    color: "#fff",
-    marginBottom: 20,
+    width: '100%',
+    height: 48,
+    backgroundColor: AppColors.surfaceElevated,
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    color: AppColors.textPrimary,
+    fontSize: 15,
+    marginBottom: 12,
   },
-  loginButton: {
-    width: "100%",
-    borderRadius: 8,
+  nameRow: {
+    flexDirection: 'row',
+    gap: 10,
   },
-  loginGradient: {
-    paddingVertical: 15,
-    borderRadius: 8,
-    alignItems: "center",
+  nameInput: {
+    flex: 1,
   },
-  loginText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
+  submitButton: {
+    width: '100%',
+    marginTop: 6,
+    borderRadius: 12,
+    minHeight: 48,
+  },
+  submitGradient: {
+    paddingVertical: 2,
+    alignItems: 'center',
+    borderRadius: 12,
+  },
+  submitText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Cochin',
   },
 });

@@ -33,7 +33,11 @@ router.post('/signup', async (req, res) => {
         const userId = user.id;
 
         let info = new Info({
-            userId
+            userId,
+            issueSummarization: "",
+            fullInfo: "",
+            doctorApproved: false,
+            forms: new Map()
         });
 
         await info.save();
@@ -90,6 +94,24 @@ router.post('/login', async (req, res) => {
             if (err) throw err;
             res.json({ token });
         });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+})
+
+router.post('/logout', async (req, res) => {
+    try {
+        const { username } = req.body;
+
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        res.json({ message: 'Logged out successfully' });
 
     } catch (error) {
         console.error(error);
