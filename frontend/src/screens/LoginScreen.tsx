@@ -33,22 +33,19 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async () => {
-        if (!email.trim() || !password.trim()) {
-            Alert.alert('Error', 'Please fill in all required fields.');
-            return;
-        }
+  const handleSubmit = async () => {
+    if (!email.trim() || !password.trim()) {
+      return;
+    }
 
-        if (isSignUp) {
-            if (!username.trim() || !firstName.trim()) {
-                Alert.alert('Error', 'Please fill in all required fields.');
-                return;
-            }
-            if (password !== confirmPassword) {
-                Alert.alert('Error', 'Passwords do not match.');
-                return;
-            }
-        }
+    if (isSignUp) {
+      if (!username.trim() || !firstName.trim()) {
+        return;
+      }
+      if (password !== confirmPassword) {
+        return;
+      }
+    }
 
         setLoading(true);
         try {
@@ -214,96 +211,96 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    gradient: {
-        flex: 1,
-    },
-    keyboardView: {
-        flex: 1,
-    },
-    scrollContent: {
-        flexGrow: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 24,
-        paddingVertical: 40,
-    },
-    appName: {
-        fontSize: 38,
-        color: AppColors.textPrimary,
-        fontWeight: 'bold',
-        fontFamily: 'Georgia-Bold',
-        marginBottom: 6,
-    },
-    tagline: {
-        fontSize: 14,
-        color: AppColors.textSecondary,
-        marginBottom: 32,
-    },
-    card: {
-        width: '100%',
-        backgroundColor: AppColors.surfaceCard,
-        borderRadius: 16,
-        padding: 20,
-    },
-    tabRow: {
-        flexDirection: 'row',
-        backgroundColor: AppColors.primaryDark,
-        borderRadius: 10,
-        marginBottom: 20,
-        padding: 3,
-    },
-    tab: {
-        flex: 1,
-        paddingVertical: 10,
-        borderRadius: 8,
-        alignItems: 'center',
-    },
-    tabActive: {
-        backgroundColor: AppColors.surfaceElevated,
-    },
-    tabText: {
-        color: AppColors.textMuted,
-        fontSize: 15,
-        fontWeight: '600',
-    },
-    tabTextActive: {
-        color: AppColors.textPrimary,
-    },
-    input: {
-        width: '100%',
-        height: 48,
-        backgroundColor: AppColors.surfaceElevated,
-        borderRadius: 10,
-        paddingHorizontal: 14,
-        color: AppColors.textPrimary,
-        fontSize: 15,
-        marginBottom: 12,
-    },
-    nameRow: {
-        flexDirection: 'row',
-        gap: 10,
-    },
-    nameInput: {
-        flex: 1,
-    },
-    submitButton: {
-        width: '100%',
-        marginTop: 6,
-        borderRadius: 10,
-        overflow: 'hidden',
-        minHeight: 48,
-    },
-    submitGradient: {
-        paddingVertical: 14,
-        alignItems: 'center',
-        borderRadius: 10,
-    },
-    submitText: {
-        color: '#fff',
-        fontSize: 17,
-        fontWeight: 'bold',
-    },
+  container: {
+    flex: 1,
+  },
+  gradient: {
+    flex: 1,
+  },
+  keyboardView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingVertical: 40,
+  },
+  appName: {
+    fontSize: 38,
+    color: AppColors.textPrimary,
+    fontWeight: 'bold',
+    fontFamily: 'Georgia-Bold',
+    marginBottom: 6,
+  },
+  tagline: {
+    fontSize: 14,
+    color: AppColors.textSecondary,
+    marginBottom: 32,
+  },
+  card: {
+    width: '100%',
+    backgroundColor: AppColors.surfaceCard,
+    borderRadius: 16,
+    padding: 20,
+  },
+  tabRow: {
+    flexDirection: 'row',
+    backgroundColor: AppColors.primaryDark,
+    borderRadius: 10,
+    marginBottom: 20,
+    padding: 3,
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  tabActive: {
+    backgroundColor: AppColors.surfaceElevated,
+  },
+  tabText: {
+    color: AppColors.textMuted,
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  tabTextActive: {
+    color: AppColors.textPrimary,
+  },
+  input: {
+    width: '100%',
+    height: 48,
+    backgroundColor: AppColors.surfaceElevated,
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    color: AppColors.textPrimary,
+    fontSize: 15,
+    marginBottom: 12,
+  },
+  nameRow: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  nameInput: {
+    flex: 1,
+  },
+  submitButton: {
+    width: '100%',
+    marginTop: 6,
+    borderRadius: 12,
+    minHeight: 48,
+  },
+  submitGradient: {
+    paddingVertical: 2,
+    alignItems: 'center',
+    borderRadius: 12,
+  },
+  submitText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Cochin',
+  },
 });
