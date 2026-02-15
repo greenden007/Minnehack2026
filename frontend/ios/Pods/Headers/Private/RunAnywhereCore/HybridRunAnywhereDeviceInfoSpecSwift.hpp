@@ -1,0 +1,1 @@
+../../../../../node_modules/@runanywhere/core/nitrogen/generated/ios/c++/HybridRunAnywhereDeviceInfoSpecSwift.hpp
