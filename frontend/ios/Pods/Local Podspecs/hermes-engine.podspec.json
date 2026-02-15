@@ -35,7 +35,7 @@
     "vendored_frameworks": "destroot/Library/Frameworks/xros/hermesvm.framework"
   },
   "user_target_xcconfig": {
-    "HERMES_CLI_PATH": "/Users/idantalker/Documents/GitHub/Idan/react-native-starter-app/node_modules/hermes-compiler/hermesc/osx-bin/hermesc"
+    "HERMES_CLI_PATH": "/Users/stefan/Projects/Minnehack2026/frontend/node_modules/hermes-compiler/hermesc/osx-bin/hermesc"
   },
   "script_phases": {
     "name": "[Hermes] Replace Hermes for the right configuration, if needed",
