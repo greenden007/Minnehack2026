@@ -1,6 +1,0 @@
-module RunAnywhereONNX {
-  umbrella header "RunAnywhereONNX-umbrella.h"
-
-  export *
-  module * { export * }
-}

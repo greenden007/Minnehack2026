@@ -1,6 +1,0 @@
-module RunAnywhereLlama {
-  umbrella header "RunAnywhereLlama-umbrella.h"
-
-  export *
-  module * { export * }
-}

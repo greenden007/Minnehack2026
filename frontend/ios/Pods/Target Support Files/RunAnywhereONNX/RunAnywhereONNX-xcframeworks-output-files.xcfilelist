@@ -1,2 +1,0 @@
-${PODS_XCFRAMEWORKS_BUILD_DIR}/RunAnywhereONNX/RABackendONNX.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/RunAnywhereONNX/onnxruntime.framework

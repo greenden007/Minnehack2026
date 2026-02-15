@@ -1,1 +1,0 @@
-../../../../../node_modules/@runanywhere/llamacpp/cpp/bridges/StructuredOutputBridge.hpp
