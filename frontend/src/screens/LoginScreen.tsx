@@ -34,7 +34,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         style={styles.gradient}
       >
         <View style={styles.content}>
-          <Text style={styles.title}>Welcome Back</Text>
+          <Text style={styles.title}>Respondr</Text>
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -54,7 +54,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             <LinearGradient
               colors={[AppColors.accentCyan, AppColors.accentViolet]}
               start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
+              end={{ x: 1, y: 4 }}
               style={styles.loginGradient}
             >
               <Text style={styles.loginText}>Log In</Text>
@@ -82,8 +82,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     color: "#fff",
-    marginBottom: 40,
+    marginBottom: 30,
     fontWeight: "bold",
+    marginTop: -30,
+    fontFamily: "Georgia-Bold",
   },
   input: {
     width: "100%",
@@ -99,13 +101,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   loginGradient: {
-    paddingVertical: 15,
+    paddingVertical: 10,
     borderRadius: 8,
     alignItems: "center",
   },
   loginText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 10,
     fontWeight: "bold",
   },
 });
