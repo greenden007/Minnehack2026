@@ -1,1 +1,0 @@
-../../../../../build/generated/ios/ReactCodegen/NitroModulesSpec/NitroModulesSpec.h
