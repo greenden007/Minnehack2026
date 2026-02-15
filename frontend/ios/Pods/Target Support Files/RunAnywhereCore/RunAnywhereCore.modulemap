@@ -1,0 +1,6 @@
+module RunAnywhereCore {
+  umbrella header "RunAnywhereCore-umbrella.h"
+
+  export *
+  module * { export * }
+}
