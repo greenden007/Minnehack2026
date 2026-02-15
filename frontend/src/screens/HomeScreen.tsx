@@ -110,7 +110,15 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 <View style={styles.notificationBody}>
                   {info.issueSummarization ? (
                     <View style={styles.summarySection}>
-                      <Text style={styles.summaryLabel}>CONDITION SUMMARY</Text>
+                      <View style={styles.summaryHeader}>
+                        <Text style={styles.summaryLabel}>CONDITION SUMMARY</Text>
+                        <TouchableOpacity
+                          style={styles.ttsButton}
+                          onPress={() => {/* rohanldinio will take care */}}
+                        >
+                          <Text style={styles.ttsButtonIcon}>🔊</Text>
+                        </TouchableOpacity>
+                      </View>
                       <Text style={styles.summaryText}>
                         {info.issueSummarization}
                       </Text>
@@ -258,7 +266,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: AppColors.accentCyan,
     letterSpacing: 1,
-    marginBottom: 6,
   },
   summaryText: {
     fontSize: 16,
@@ -360,5 +367,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     fontFamily: 'Cochin',
+  },
+  summaryHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  ttsButton: {
+    backgroundColor: AppColors.accentCyan,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ttsButtonIcon: {
+    fontSize: 16,
   },
 });

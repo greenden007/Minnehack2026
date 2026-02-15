@@ -89,7 +89,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
   const removeContact = (index: number) => {
     setEmergencyNums((prev) => prev.filter((_, i) => i !== index));
   };
-
   if (loading) {
     return (
       <View style={styles.container}>
@@ -105,7 +104,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
       </View>
     );
   }
-
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -154,11 +152,21 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ navigation }) => {
               />
             </View>
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Detailed Medical Info</Text>
-              <Text style={styles.sectionHint}>
-                Full details about conditions, medications, allergies,
-                treatment plans, etc.
-              </Text>
+              <View style={styles.sectionHeader}>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.sectionTitle}>Detailed Medical Info</Text>
+                  <Text style={styles.sectionHint}>
+                    Full details about conditions, medications, allergies,
+                    treatment plans, etc.
+                  </Text>
+                </View>
+                <TouchableOpacity
+                  style={styles.voiceButton}
+                  onPress={() => {/* rohanldinio will take care */}}
+                >
+                  <Text style={styles.voiceButtonIcon}>🎙</Text>
+                </TouchableOpacity>
+              </View>
               <TextInput
                 style={[styles.input, styles.textArea]}
                 placeholder="Include all relevant medical information: conditions, medications with dosages, allergies, blood type, treatment instructions..."
@@ -353,5 +361,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     fontFamily: 'Cochin',
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  voiceButton: {
+    backgroundColor: AppColors.accentCyan,
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
+  },
+  voiceButtonIcon: {
+    fontSize: 18,
   },
 });
