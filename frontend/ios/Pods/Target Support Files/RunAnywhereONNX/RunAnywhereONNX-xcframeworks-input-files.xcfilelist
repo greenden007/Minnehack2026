@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/RunAnywhereONNX/RunAnywhereONNX-xcframeworks.sh
+${PODS_ROOT}/../../node_modules/@runanywhere/onnx/ios/Frameworks/RABackendONNX.xcframework
+${PODS_ROOT}/../../node_modules/@runanywhere/onnx/ios/Frameworks/onnxruntime.xcframework

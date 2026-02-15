@@ -1,0 +1,6 @@
+module Pods_RunAnywhereStarter {
+  umbrella header "Pods-RunAnywhereStarter-umbrella.h"
+
+  export *
+  module * { export * }
+}
